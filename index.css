@@ -1,0 +1,140 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    background-image: url(images/background.png);
+}
+
+.section {
+	max-width:1360px;
+    max-height: 3000px;
+	margin:0 auto;
+	
+}
+
+.grid {
+	margin: 20px 0 0 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
+.grid:after {
+	clear: both;
+}
+
+.grid:after,
+.box:before {
+	content: '';
+    display: table;
+}
+
+.grid li {
+	width: 328px;
+	height: 328px;
+	display: inline-block;
+	margin: 20px;
+}
+
+.box {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	cursor: pointer;
+    border-radius: 10px;
+    -webkit-transition: 0.3s ease-in-out, 
+    -webkit-transform 0.3s ease-in-out;
+	-moz-transition:  0.3s ease-in-out, 
+    -moz-transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out, 
+    transform 0.3s ease-in-out, ;
+}
+
+
+/*.img-1 { 
+ background: 
+    url(table.png);
+    background-size: 100%;
+}*/
+
+
+.info {
+	position: absolute;
+	width: inherit;
+	height: inherit;
+}
+
+.info h3 {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+	color: #fff;
+	font-size: 42px;
+	margin: 0 30px;
+	padding: 100px 0 0 0;
+	line-height:1.5;
+}
+
+.btn {
+    font-family: 'Source Sans Pro', sans-serif;
+	color: #000;
+	padding: 4px 5px;
+	margin: 0 30px;
+	font-size: 14px;
+	line-height:2;
+    
+}
+
+img{
+	width: 104%;
+    background-size: 20%;
+}
+
+.sidebar{
+    grid-area: sidebar;
+    background: linear-gradient(to right,
+    rgba(249,107,142,1),
+    rgba(218,103,230,1),
+    rgba(130,125,254,1));
+    justify-content: center;
+    
+}
+
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+nav li{
+    list-style: none;
+    padding: 1em 0;
+}
+
+nav li a{
+    color: white;
+    font-weight: 700;
+    opacity: 0.6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav li a:hover{
+    opacity: 1;
+    text-decoration: none;
+    color: 
+}
+
+
+@media (min-width:280px) and (max-width:560px){
+    .content{
+        background: url(images/background_mobile.png);
+    }
+    nav li{
+        padding: 0.7em 0;
+        
+    }
+}
+

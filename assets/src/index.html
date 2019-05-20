@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+		<title>Vue_Shop</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link href="index.css" type="text/css" rel="stylesheet">
+		<style>
+            body, html{
+                background-color: #696969;
+                margin: 0;
+            }
+
+            img{
+                width: 104%;
+            }
+
+            .pointer{
+                cursor: pointer;
+            }
+
+            .phone-block{
+                height: 36px;
+            }
+
+            .modal{
+                display: block;
+            }
+        </style>
+	</head>
+	<body>
+        <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Promo</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+		<div class="container pt-5" id="app">
+			<div class="row mb-3">
+				<div class="col">
+					<h1 id="font">Furniture Aplication</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="search">Find your furniture</label>
+						<input 
+							   type="text"
+							   class="form-control"
+							   id="search"
+							   placeholder="Name, model ..."
+							   v-model="search"
+						>
+					</div>
+					
+					<hr>
+					
+					<ul class="list-group">
+						<li 
+                            
+							v-for="(furniture, index) of filteredFurnitures"
+							class="list-group-item list-group-item-action pointer"
+							v-on:click="selectFurniture(furniture,index)"
+							v-bind:class="{'active' : selectedFurnitureIndex === index}"
+                            id="font"
+							><img 
+								 v-bind:src="furniture.image"
+								 v-bind:alt="furniture.name" 
+								 class="rounded detailed-image"
+							>
+							{{ furniture.name }} - {{ furniture.model }} 						
+						</li>
+						
+					</ul>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						
+						<div class="col-md-6 mr-3">
+							<h2 id="font-roboto">{{ furniture.name }}</h2>
+							<img 
+								 v-bind:src="furniture.image"
+								 v-bind:alt="furniture.name" 
+								 class="rounded detailed-image"
+							>
+						</div>
+						
+						<div class="col-md-7 pt-2">
+                            <h5 >Furniture details</h5>
+							
+							<ul>
+								<li>Model - <strong>{{ furniture.model }}</strong></li>
+								<li>Year - <strong>{{ furniture.year }}</strong></li>
+								<li>Price - <strong>{{ furniture.price + '$' }}</strong></li>
+								<li >Description - <strong>{{ furniture.description }}</strong></li>
+                                <p>Card: {{cart}} $</p>
+							</ul>
+							
+							<div class="phone-block">
+								<p v-if="phoneVisibility">{{ furniture.phone }}</p>
+							</div>
+							
+							<button class="btn btn-outline-success mr-3" 
+									v-on:click="phoneVisibility = !phoneVisibility"
+									>{{ phoneBtnText }}</button>
+							<button class="btn btn-primary" @click="modalVisibility = true">Preview</button>
+							<button class="btn btn-primary" @click="modalVisibilityCard = true">Card</button><!--v-on:click="selectFurniture(furniture,index)"-->
+						</div>						
+					</div>
+				</div>
+			</div>
+
+
+				<!-- Modal -->
+				<div class="modal fade show" v-if="modalVisibility" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Do you want to buy this {{furniture.name}}?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="modalVisibility = false">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body">
+						<div class="sketchfab-embed-wrapper"><iframe width="100%" height="480" v-bind:src="furniture.link" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+						</div>
+					  </div>
+                        
+					  <div class="modal-footer">
+                          <button v-on:click="addToCartItem"  type="button" class="btn ">Add to Cart</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
+            
+                <div class="modal fade show" v-if="modalVisibilityCard" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Card Payment</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="modalVisibilityCard = false">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body">
+                          <p>Card: {{cart}} $</p>
+                          <ul class="list-group">
+                                <!-- v-for="(furniture, index) of filteredFurnitures" -->
+                              <li 
+                                
+                                v-for="item in inventory" 
+                                
+                                 
+                                  
+                                class="list-group-item list-group-item-action pointer"
+                                >
+                                {{item.name}} - {{item.price}}$					
+                            </li>
+
+                        </ul>
+					  </div>
+                        
+					  <div class="modal-footer">
+                
+					  </div>
+					</div>
+				  </div>
+				</div>
+            
+			<div class="modal-backdrop fade show" v-if="modalVisibility"></div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script src="index.js"></script>
+	</body>
+</html>

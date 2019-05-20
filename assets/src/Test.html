@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+        .section {
+            max-width:1360px;
+            max-height: 3000px;
+            margin:0 auto;
+            padding:6% 2%;
+        }
+
+        .grid {
+            margin: 20px 0 0 0;
+            padding: 0;
+            list-style: none;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .grid:after {
+            clear: both;
+        }
+
+        .grid:after,
+        .box:before {
+            content: '';
+            display: table;
+        }
+
+        .grid li {
+            width: 328px;
+            height: 328px;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            -webkit-transition: 0.3s ease-in-out, 
+            -webkit-transform 0.3s ease-in-out;
+            -moz-transition:  0.3s ease-in-out, 
+            -moz-transform 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out, 
+            transform 0.3s ease-in-out, ;
+        }
+
+        .box:hover {
+            transform: scale(1.05); 
+        }
+
+        .img-1 { 
+         background: 
+            url(table.png);
+            background-size: 100%;
+        }
+
+        .img-2 { 
+         background: 
+            url(bed.png);
+            background-size: 100%;
+        }
+
+        .img-3 { 
+         background:   
+            url(nightstand.png);
+            background-size: 100%;
+        }
+
+        .img-4 { 
+         background: 
+            url(nightstand_expensive.png);
+            background-size: 100%;
+        }
+
+        .img-5 { 
+         background: 
+            url(sofa.png);
+            background-size: 100%;
+        }
+
+        .info {
+            position: absolute;
+            width: inherit;
+            height: inherit;
+        }
+
+        .info h3 {
+            font-family: 'Pacifico', cursive;
+            font-weight: 400;
+            color: #fff;
+            font-size: 42px;
+            margin: 0 30px;
+            padding: 100px 0 0 0;
+            line-height:1.5;
+        }
+
+        .btn {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #fff;
+            padding: 4px 5px;
+            margin: 0 30px;
+            font-size: 14px;
+            line-height:2;
+        }
+
+        img{
+            width: 104%;
+            background-size: 20%;
+        }
+
+    </style>
+</head>
+<body>
+	   
+    
+	<div class="section">
+		<ul class="grid">
+            <li>
+				<div class="box img-1">
+					<a href="#">
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="box img-2">
+					<a href="#">
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="box img-3">
+					<a href="#">
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="box img-4">
+					<a href="#">
+					</a>
+				</div>
+			</li>
+            			<li>
+				<div class="box img-5">
+					<a href="#">
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+    <div id='myapp'>
+ 
+
+      <!-- Checkboxes list -->
+      <ul>
+        <li v-for='(car,index) of cars'>
+         <input type='checkbox' v-bind:value='lang' v-model='languages' @change='updateCheckall()'>{{ lang }}
+        </li>
+      </ul>
+
+      <!-- Print -->
+      <input type='button' @click='printValues()' value='Print Selected Values'>
+
+      <br>
+      Selected items : {{ selectedlang }}
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+
+    </script>
+
+</body>
+</html>
